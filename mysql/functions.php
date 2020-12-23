@@ -13,7 +13,7 @@ function showAllData() {
   
   while($row = mysqli_fetch_assoc($result)){
     $id = $row['id'];
-    echo "<option value='$id'>$id</option>";
+    echo '<option value="' . $id . '">' . $id . '</option>';
   }
 }
 
@@ -58,9 +58,17 @@ function createRows() {
   if(isset($_POST['submit'])){
     $username = $_POST['username'];
     $password = $_POST['password'];
+    $username = mysqli_real_escape_string($connection, $username);
+    $password = mysqli_real_escape_string($connection, $password);
     if (!$username || !$password) {
       die("Please enter a username and password");
     }
+
+    $hashFormat = "$2y$10$";
+    $salt = "howareyouonthisfineday";
+    $hash_and_salt = $hashFormat . $salt;
+
+    $password = crypt($password, $hash_and_salt);
     
     $query = "INSERT INTO users (username, password) VALUES ('$username', '$password')";
     $result = mysqli_query($connection, $query);
@@ -87,11 +95,10 @@ function readData() {
 }
 
 function formTemplate($type) {
-  $data = showAllData();
   echo '<div class="container">
   <div class="col-xs-6">
-  <h1 class="text-center">' . ucfirst($type) . '</h1>
-  <form action="login_' . $type . '.php" method="POST">
+  <h1 class="text-center">', ucfirst($type), '</h1>
+  <form action="login_', $type, '.php" method="POST">
       <div class="form-group">
         <label for="username">Username</label>
         <input type="text" class="form-control" name="username">
@@ -101,9 +108,9 @@ function formTemplate($type) {
         <input type="password" class="form-control" name="password">
       </div>
       <div class="form-group">
-        <select name="id">' . $data . '</select>
+        <select name="id">', showAllData(), '</select>
       </div>
-      <input type="submit" name="submit" value="' . ucfirst($type) . '" class="btn btn-primary">
+      <input type="submit" name="submit" value="', ucfirst($type), '" class="btn btn-primary">
     </form>
   </div>';
 }

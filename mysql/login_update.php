@@ -7,10 +7,7 @@ include "functions.php";
 //   echo $id['id'];
 // }{
   updateTable();
-?>
-
-
-
-<?php include "includes/header.php"; ?>
-<?php formTemplate('update'); ?>
-<?php include "includes/footer.php"; ?>
+ include "includes/header.php"; 
+ formTemplate('update'); 
+ include "includes/footer.php"; 
+ ?>

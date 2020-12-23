@@ -10,14 +10,6 @@ deleteRows();
 
 
 ?>
-
-
-
-
-
-
-
-
 <?php include "includes/header.php"; ?>
 <?php formTemplate('delete'); ?>
 <?php include "includes/footer.php"; ?>
