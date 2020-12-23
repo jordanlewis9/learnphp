@@ -5,12 +5,19 @@ include "functions.php";
 // $idresult = mysqli_query($connection, $idquery);
 // while($id = mysqli_fetch_assoc($idresult)){
 //   echo $id['id'];
-// }{
-  updateTable();
+// }
+deleteRows();
+
+
 ?>
 
 
 
+
+
+
+
+
 <?php include "includes/header.php"; ?>
-<?php formTemplate('update'); ?>
+<?php formTemplate('delete'); ?>
 <?php include "includes/footer.php"; ?>
